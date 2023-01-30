@@ -29,7 +29,7 @@ function NoteList() {
     .collection("users")
     .doc(auth.currentUser.uid)
     .collection("notes");
-  const query = ref.orderBy("createdAt");
+  const query = ref.orderBy("createdAt", "desc");
   const [querySnapshot] = useCollection(query);
 
   const notes = querySnapshot?.docs.map((doc) => doc.data());

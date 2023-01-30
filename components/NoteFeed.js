@@ -13,11 +13,20 @@ export default function NoteFeed({ notes, admin }) {
 
 function NoteItem({ note, admin = false }) {
   const theme = useTheme();
-  // Naive method to calc word count and read time
-  const wordCount = note?.content.trim().split(/\s+/g).length;
-  const minutesToRead = (wordCount / 100 + 1).toFixed(0);
 
+  console.log("NOTE", note);
   // console.log(fromMillis(note.createdAt));
+
+  const createdAt =
+    typeof note?.createdAt === "number"
+      ? new Date(note.createdAt)
+      : note.createdAt.toDate();
+
+  const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 
   return (
     <Paper
@@ -47,14 +56,8 @@ function NoteItem({ note, admin = false }) {
             </Typography>
           </Link>
 
-          <Box sx={{ mb: 1 }}>
-            <Typography variant="p">
-              {wordCount} words. {minutesToRead} min read
-            </Typography>
-          </Box>
-
           <Link href={`/${note.username}`} style={{ textDecoration: "none" }}>
-            Posted by u/{note.username}
+            Posted by u/{note.username} on {formattedDate}
           </Link>
         </Grid>
 

@@ -9,8 +9,6 @@ export default function NoteContent({ note }) {
       ? new Date(note.createdAt)
       : note.createdAt.toDate();
 
-  console.log("CREATED AT", new Date(createdAt).toLocaleDateString());
-
   const formattedDate = new Date(createdAt).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
@@ -19,11 +17,14 @@ export default function NoteContent({ note }) {
 
   return (
     <Box>
-      <Typography variant="p" sx={{ ml: 2 }}>
-        Written by <Link href={`/${note.username}/`}>@{note.username}</Link> on{" "}
-        {formattedDate}
-      </Typography>
-      <Box sx={{ border: "1px solid gray", p: 3, borderRadius: "20px" }}>
+      <Box sx={{ mb: 1 }}>
+        <Typography variant="p" sx={{ ml: 2, fontSize: "1.3rem" }}>
+          Posted by <Link href={`/${note.username}/`}>u/{note.username}</Link>{" "}
+          on {formattedDate}
+        </Typography>
+      </Box>
+
+      <Box sx={{ bgcolor: "white", p: 3, borderRadius: "15px" }}>
         <ReactMarkdown>{note?.content}</ReactMarkdown>
       </Box>
     </Box>
