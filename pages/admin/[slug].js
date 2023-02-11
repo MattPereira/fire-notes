@@ -101,7 +101,16 @@ function NoteForm({ defaultValues, noteRef, preview }) {
   return (
     <form onSubmit={handleSubmit(updateNote)}>
       {preview && (
-        <Box>
+        <Box
+          sx={{
+            bgcolor: "white",
+            p: 2,
+            mb: 3,
+            borderRadius: "10px",
+            border: "1px solid black",
+            code: { bgcolor: "#e0e0e0", px: 0.4, borderRadius: "5px" },
+          }}
+        >
           <ReactMarkdown>{watch("content")}</ReactMarkdown>
         </Box>
       )}
